@@ -4,13 +4,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import {
-    Alert,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  Alert,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
 export default function LoginScreen() {
@@ -27,13 +27,13 @@ export default function LoginScreen() {
 
     setLoading(true);
     try {
-      const response = await API.post('/login', { email, password });
+      const response = await API.post('/auth/login', { email, password });
       
       await AsyncStorage.setItem('userToken', response.data.token);
       await AsyncStorage.setItem('userData', JSON.stringify(response.data.user));
       
       Alert.alert('Success', 'Login successful!');
-      router.replace('/(tabs)');
+      router.replace('/(users)/(tabs)');
     } catch (error: any) {
       Alert.alert('Error', error.response?.data?.error || 'Login failed');
     } finally {

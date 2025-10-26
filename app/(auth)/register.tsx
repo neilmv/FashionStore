@@ -4,13 +4,13 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useRouter } from 'expo-router';
 import { useState } from 'react';
 import {
-    Alert,
-    ScrollView,
-    StyleSheet,
-    Text,
-    TextInput,
-    TouchableOpacity,
-    View,
+  Alert,
+  ScrollView,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
 } from 'react-native';
 
 export default function RegisterScreen() {
@@ -63,13 +63,13 @@ export default function RegisterScreen() {
     try {
       const { confirmPassword, ...registerData } = formData;
       
-      const response = await API.post('/register', registerData);
+      const response = await API.post('/auth/register', registerData);
       
       await AsyncStorage.setItem('userToken', response.data.token);
       await AsyncStorage.setItem('userData', JSON.stringify(response.data.user));
       
       Alert.alert('Success', 'Account created successfully!');
-      router.replace('/(tabs)');
+      router.replace('/(users)/(tabs)');
     } catch (error: any) {
       console.error('Registration error:', error);
       Alert.alert('Error', error.response?.data?.error || 'Registration failed');
